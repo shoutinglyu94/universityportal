@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Error Page</title>
 <style type="text/css">
 #main_context {
 	height: 100%;
@@ -16,16 +15,16 @@
 	color: #666;
 }
 </style>
+<title>Success Page</title>
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div id="main_context">
-		<h1>Sorry! There is an error:</h1>
-		<h2>${message}</h2>
-
-		<a href="${contextPath/home.htm}">Go to the login page</a>
+		<h1>Congrats!</h1>
+		<p>${message}</p>
+		<p></p>
+		<a href="${contextPath/home.htm}">Go Back to the dashboard!</a>
 	</div>
-
 </body>
 </html>

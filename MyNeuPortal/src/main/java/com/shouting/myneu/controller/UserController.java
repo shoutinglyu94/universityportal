@@ -9,6 +9,8 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -22,10 +24,41 @@ import com.shouting.myneu.pojo.User;
 @Controller
 public class UserController {
 	
+	@RequestMapping(value = "/home.htm", method = RequestMethod.GET)
+	public String loginUser(HttpServletRequest request,Model model) {
+		HttpSession session  = request.getSession();
+		if((User)session.getAttribute("user")!=null) return "user-home";
+		model.addAttribute("message","User has been expired");
+		return "error";
+	}
+	@RequestMapping(value = "/home.htm", method = RequestMethod.POST)
+    public String loginUser(HttpServletRequest request,UserDAO userDao, ModelMap map) {
+
+        String username = request.getParameter("login_username");
+        String password = request.getParameter("login_password");
+        try {
+            User u = userDao.get(username, password);
+            HttpSession session  = request.getSession();
+            session.setAttribute("user", u);
+            if (u != null && u.getStatus() == 1) {
+                return "user-home";
+            } else if (u != null && u.getStatus() == 0) {
+                map.addAttribute("errorMessage", "Please activate your account to login!");
+                return "error";
+            } else {
+                map.addAttribute("errorMessage", "Invalid username/password!");
+                return "error";
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 	@RequestMapping(value = "user/register.htm", method = RequestMethod.POST)
 	public String registerNewUser(HttpServletRequest request, UserDAO userDao, ModelMap map) {
 		HttpSession session = request.getSession();
-		String fullname = request.getParameter("userfullname");
 		String useremail = request.getParameter("useremail");
 		String password = request.getParameter("userpassword");
 		
@@ -33,7 +66,6 @@ public class UserController {
 		User user = new User();
 		user.setUseremail(useremail);
 		user.setPassword(password);
-		user.setFullname(fullname);
 		user.setStatus(0);
 		try {
 			User u = userDao.register(user);
@@ -75,7 +107,7 @@ public class UserController {
         if ((Integer)(session.getAttribute("key1")) == key1 && ((Integer)session.getAttribute("key2"))== key2) {
             try {
                 System.out.println("HI________");
-                boolean updateStatus = userDao.updateUser(email);
+                boolean updateStatus = userDao.updateUserState(email);
                 if (updateStatus) {
                     return "user-home";
                 } else {
@@ -93,48 +125,36 @@ public class UserController {
         return "index";
     }
 	
-	@RequestMapping(value = "user/home.htm", method = RequestMethod.GET)
-	public String loginUser(HttpServletRequest request,Model model) {
-		HttpSession session  = request.getSession();
-		if((User)session.getAttribute("user")!=null) return "user-home";
-		model.addAttribute("message","User has been expired");
-		return "error";
-	}
-	@RequestMapping(value = "user/home.htm", method = RequestMethod.POST)
-    public String loginUser(HttpServletRequest request,UserDAO userDao, ModelMap map) {
-
-        String username = request.getParameter("login_username");
-        String password = request.getParameter("login_password");
-        try {
-            User u = userDao.get(username, password);
-            HttpSession session  = request.getSession();
-            session.setAttribute("user", u);
-            if (u != null && u.getStatus() == 1) {
-                return "user-home";
-            } else if (u != null && u.getStatus() == 0) {
-                map.addAttribute("errorMessage", "Please activate your account to login!");
-                return "error";
-            } else {
-                map.addAttribute("errorMessage", "Invalid username/password!");
-                return "error";
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return null;
-    }
+	
 
 	
-	@RequestMapping(value="user/contact.htm",method = RequestMethod.GET)
-	public String editContactInformation() {
-		return "user-contact";
+	@RequestMapping(value="user/account.htm",method = RequestMethod.GET)
+	public String showPersonalInformation() {
+		return "user-account";
 	}
-	
-	@RequestMapping(value="user/savecontact.htm", method= RequestMethod.POST)
-	public String showConatactInformation() {
-		return "user-home";
+	@RequestMapping(value="user/personalinformation/edit.htm",method = RequestMethod.GET)
+	public String editPersonalInformation() {
+		return "user-personalinformation-edit";
+	}
+	@RequestMapping(value="user/personalinformation/savecontact.htm", method= RequestMethod.POST)
+	public String showConatactInformation(HttpServletRequest request,UserDAO userDao) {
+		HttpSession session = request.getSession();
+		User user =(User) session.getAttribute("user");
+		user.setFirstname(request.getParameter("first_name"));
+		user.setLastname(request.getParameter("last_name"));
+		user.setAddress(request.getParameter("address"));
+		user.setCity(request.getParameter("city"));
+		user.setState(request.getParameter("state"));
+		user.setPhone(request.getParameter("phone"));
+		int modification=0;
+		try {
+			modification = userDao.updateUserPersonalInformation(user);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if(modification ==1) return "user-personalinformation";
+		else return "error";
+
 	}
 	
 	public void sendEmail(String useremail, String message) {

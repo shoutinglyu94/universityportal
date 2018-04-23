@@ -13,7 +13,6 @@
 	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
 <link rel="stylesheet" href="css/style_index.css">
 
-
 </head>
 
 <body>
@@ -59,7 +58,7 @@
 
 				<!-- Username & Password Login form -->
 				<div class="user_login">
-					<form method="POST" action="user/home.htm">
+					<form method="POST" action="home.htm">
 						<label>Email / Username</label> <input type="email"
 							name="login_username" /> <br /> <label>Password</label> <input
 							type="password" name="login_password" /> <br />
@@ -87,8 +86,7 @@
 				<!-- Register Form -->
 				<div class="user_register">
 					<form method="POST" action="user/register.htm">
-						<label>Full Name</label> <input type="text" name="userfullname" />
-						<br /> <label>Email Address</label> <input type="email"
+						<label>Email Address</label> <input type="email"
 							name="useremail" /> <br /> <label>Password</label> <input
 							type="password" name="userpassword" /> <br />
 

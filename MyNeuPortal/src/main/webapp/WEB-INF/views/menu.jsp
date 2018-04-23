@@ -51,10 +51,10 @@ color:white;
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<ul>
-		<li><a class="active" href="${contextPath}/user/home.htm">Home</a></li>
-		<li><a href="${contextPath}/user/contact.htm">News</a></li>
-		<li><a href="#contact">Contact</a></li>
-		<li><a href="#about">About</a></li>
+		<li><a class="active" href="${contextPath}/home.htm">Home</a></li>
+		<li><a href="${contextPath}/user/account.htm">Account</a></li>
+		<li><a href="${contextPath}/discover.htm">Discover</a></li>
+		<li><a href="${contextPath}/event/new.htm">Create Event</a></li>
 	</ul>
 </body>
 </html>

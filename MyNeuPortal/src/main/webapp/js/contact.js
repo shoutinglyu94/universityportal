@@ -79,49 +79,29 @@ $(document).ready(function() {
                         message: 'Please select your state'
                     }
                 }
-            },
-            zip: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your zip code'
-                    },
-                    zipCode: {
-                        country: 'US',
-                        message: 'Please supply a vaild zip code'
-                    }
-                }
-            },
-            comment: {
-                validators: {
-                      stringLength: {
-                        min: 10,
-                        max: 200,
-                        message:'Please enter at least 10 characters and no more than 200'
-                    },
-                    notEmpty: {
-                        message: 'Please supply a description of your project'
-                    }
-                    }
-                }
             }
-        })
-        .on('success.form.bv', function(e) {
-            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-                $('#contact_form').data('bootstrapValidator').resetForm();
-
-            // Prevent form submission
-            e.preventDefault();
-
-            // Get the form instance
-            var $form = $(e.target);
-
-            // Get the BootstrapValidator instance
-            var bv = $form.data('bootstrapValidator');
-
-            // Use Ajax to submit form data
-            $.post($form.attr('action'), $form.serialize(), function(result) {
-                console.log(result);
-            }, 'json');
+        }
         });
+    
+        $("#submit").on("click", function(e){
+
+        	var bootstrapValidator = $('#contact_form').data('bootstrapValidator');
+        	
+        	bootstrapValidator.validate();
+        	
+            if(bootstrapValidator.isValid()){
+            	$('#success_message').slideDown({ opacity: "show" }, "slow");
+            	// Prevent form submission
+            	//e.preventDefault();
+            	//url
+            	var url = $('#contact_form').attr('action');
+                // Send the data using post
+                var posting = $.post( 
+                		url, 
+                		$('#contact_form').serialize());
+                var t = setTimeout('$("#success_message").slideUp({ opacity: "show" }, "slow")',1000);
+            }
+        });
+
 });
 

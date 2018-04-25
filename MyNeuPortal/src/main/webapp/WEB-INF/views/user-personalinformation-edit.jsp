@@ -25,7 +25,6 @@
 	<jsp:include page="menu.jsp"></jsp:include>
 
 	<div id="contact_information" class="container">
-
 		<form class="well form-horizontal" action="savecontact.htm"
 			method="post" id="contact_form">
 			<fieldset>
@@ -234,7 +233,7 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/contact.js"></script>
+		src="${pageContext.request.contextPath}/js/account.js"></script>
 
 </body>
 </html>

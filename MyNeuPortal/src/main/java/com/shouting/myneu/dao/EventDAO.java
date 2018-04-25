@@ -68,8 +68,41 @@ public class EventDAO extends DAO{
 		return null;
 	}
 	
-	public void deleteEvent(Event event) {
-		
+	public int updateEvent(Event event,int id) throws Exception {
+		try {
+			begin();
+			Query q = getSession().createQuery("update Event set "
+					+ "address = :address, "
+					+ "date = :date, "
+					+ "title = :title, "
+					+ "description = :description "
+					+ "where id = :id");
+			q.setInteger("id", id);
+			q.setString("address", event.getAddress());
+			q.setString("date", event.getDate());
+			q.setString("title",event.getTitle());
+			q.setString("description",event.getDescription());
+			int modification = q.executeUpdate();
+			commit();
+			return modification;
+		} catch (HibernateException e) {
+			rollback();
+			throw new Exception("Sorry! We cannot update the event." + e.getMessage());
+		}
+	}
+
+	public int deleteEvent(int id) throws Exception {
+		try {
+			begin();
+			Query q = getSession().createQuery("delete from Event where id = :id)");
+			q.setInteger("id", id);
+			int modification = q.executeUpdate();
+			commit();
+			return modification;
+		} catch (HibernateException e) {
+			rollback();
+			throw new Exception("Sorry! We cannot delete the event" + e.getMessage());
+		}
 	}
 	
 	

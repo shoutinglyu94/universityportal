@@ -54,7 +54,7 @@ color:white;
 		<li><a class="active" href="${contextPath}/home.htm">Home</a></li>
 		<li><a href="${contextPath}/user/account.htm">Account</a></li>
 		<li><a href="${contextPath}/discover.htm">Discover</a></li>
-		<li><a href="${contextPath}/event/new.htm">Create Event</a></li>
+		<li><a href="">A</a></li>
 	</ul>
 </body>
 </html>

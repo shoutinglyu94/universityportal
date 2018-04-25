@@ -11,7 +11,7 @@
 
 #main_context {
 	height: 100%;
-	margin-left: 20%;
+	margin-left: 15%;
 	padding: 1px 16px;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 14px;
@@ -35,25 +35,24 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
-<title>Event Creation</title>
+<title>Edit Event</title>
 </head>
-
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div id="main_context" class="container">
-		<form class="well form-horizontal" method="POST" action="new.htm"
+		<form class="well form-horizontal" method="POST" action="edit.htm"
 			id="create_event_form">
 			<fieldset>
 				<!-- Form Name -->
-				<legend>Event Information</legend>
+				<legend>Edit Event</legend>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Title</label>
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-calendar"></i></span> <input
-								name="event_title" placeholder="Event Title"
-								class="form-control" type="text">
+								name="event_title" value="${event.title}" class="form-control"
+								type="text">
 						</div>
 					</div>
 				</div>
@@ -63,7 +62,7 @@
 						<div class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-list-alt"></i></span>
-							<textarea name="event_description" class="form-control"></textarea>
+							<textarea name="event_description" class="form-control">${event.description}</textarea>
 						</div>
 					</div>
 				</div>
@@ -73,7 +72,7 @@
 						<div class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-home"></i></span> <input
-								name="event_address" placeholder="Event Address"
+								name="event_address" value="${event.address}"
 								class="form-control" type="text">
 						</div>
 					</div>
@@ -82,18 +81,19 @@
 					<label class="col-md-4 control-label">Date</label>
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group date" id="datepicker">
-							<input type="text" class="form-control" name="event_date">
+							<input type="text" class="form-control" name="event_date"
+								value="${event.date}">
 							<div class="input-group-addon">
 								<span class="glyphicon glyphicon-th"></span>
 							</div>
 						</div>
 					</div>
 				</div>
-
+				<input type="hidden" name="event_id" value="${event.id}">
 				<!-- Success message -->
 				<div class="alert alert-success" role="alert" id="success_message">
 					Success <i class="glyphicon glyphicon-thumbs-up"></i> Thank you!
-					Your event has been saved!
+					Your event has been updated!
 				</div>
 
 				<!-- Button -->
@@ -101,7 +101,7 @@
 					<label class="col-md-4 control-label"></label>
 					<div class="col-md-4">
 						<button type="submit" id="submit" class="btn btn-warning">
-							Create <span class="glyphicon glyphicon-send"></span>
+							Save <span class="glyphicon glyphicon-send"></span>
 						</button>
 					</div>
 				</div>

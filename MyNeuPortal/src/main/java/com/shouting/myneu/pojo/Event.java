@@ -43,8 +43,11 @@ public class Event {
        joinColumns = {@JoinColumn(name="event_id", nullable = false, updatable = false)},
        inverseJoinColumns = {@JoinColumn(name="user_id")}
     )
-	private Set<User> participants = new HashSet<User>();
+	private Set<User> participants;
 
+	public Event() {
+		this.participants = new HashSet<User>();
+	}
 	public int getId() {
 		return id;
 	}
@@ -110,5 +113,9 @@ public class Event {
 		this.participants = participants;
 	}
 	
+	public void clearParticipants() {
+		if(this.participants==null|| this.participants.isEmpty()) return;
+		participants.clear();
+	}
 	
 }

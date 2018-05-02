@@ -5,13 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Home Page</title>
-<style>
-/* #footer {
-	padding: 1px 16px;
-	height: 1000px;
-} */
-</style>
+<title>Search Result</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script
@@ -52,81 +46,62 @@
 			<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
 			</li>
 		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search"
+		<form class="form-inline my-2 my-lg-0" method="GET"
+			action="${contextPath}/event/search.htm">
+			<input class="form-control mr-sm-2" type="text" name="keyword"
 				placeholder="Search" aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 	</div>
 	</nav>
-	<div id="news_dashboard" class="container">
-		<div id="accordion">
-			<div class="card">
-				<div class="card-header" id="headingOne">
-					<h5 class="mb-0">
-						<button class="btn btn-link" data-toggle="collapse"
-							data-target="#collapseOne" aria-expanded="true"
-							aria-controls="collapseOne">News</button>
-					</h5>
-				</div>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Title</th>
+				<th scope="col">Address</th>
+				<th scope="col">Date</th>
+			</tr>
+		</thead>
+		<tbody>
+		<c:forEach items="${resultList}" var="event" >
+			<tr><th scope="row"></tr>
+		</c:forEach>
+			<tr>
+				<th scope="row">1</th>
+				<td>Mark</td>
+				<td>Otto</td>
+				<td>@mdo</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>Jacob</td>
+				<td>Thornton</td>
+				<td>@fat</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td>Larry</td>
+				<td>the Bird</td>
+				<td>@twitter</td>
+			</tr>
+		</tbody>
+	</table>
 
-				<div id="collapseOne" class="collapse show"
-					aria-labelledby="headingOne" data-parent="#accordion">
-					<div class="card-body">
-						<table class="table">
-							<tr>
-								<th>Title</th>
-								<th>Professor</th>
-							</tr>
-							<c:forEach items="${newsList}" var="news">
-								<tr>
-								<td>${news.title}</td>
-								<td>${news.description}</td>
-								</tr>
-							</c:forEach>
-						</table>
-						<a href="${contextPath}/news/dashboard.htm"
-							class="btn btn-default btn-lg" role="button">More</a>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-header" id="headingTwo">
-					<h5 class="mb-0">
-						<button class="btn btn-link collapsed" data-toggle="collapse"
-							data-target="#collapseTwo" aria-expanded="false"
-							aria-controls="collapseTwo">Courses</button>
-					</h5>
-				</div>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-					data-parent="#accordion">
-					<div class="card-body">
-						<table class="table">
-							<tr>
-								<th>Title</th>
-								<th>Professor</th>
-							</tr>
-							<c:forEach items="${courseList}" var="course">
-								<tr>
-								<td>${course.title}</td>
-								<td>${course.professor.firstname} ${course.professor.lastname}</td>
-								</tr>
-							</c:forEach>
-						</table>
-						<a href="${contextPath}/course/dashboard.htm"
-							class="btn btn-default btn-lg" role="button">More</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- 	<footer id="footer">
-	<p>Posted by: Hege Refsnes</p>
-	<p>
-		Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.
-	</p>
-	</footer> -->
+	<ul class="pagination justify-content-end">
+		<c:if test="${page>1}">
+			<li class="page-item"><a class="page-link"
+				href="${contextPath}/discover.htm?page=${page-1}">Previous</a></li>
+		</c:if>
+		<li class="page-item"><a class="page-link"
+			href="${contextPath}/discover.htm?page=${page}">${page}</a></li>
+		<li class="page-item"><a class="page-link"
+			href="${contextPath}/discover.htm?page=${page+1}">${page+1}</a></li>
+		<li class="page-item"><a class="page-link"
+			href="${contextPath}/discover.htm?page=${page+2}">${page+2}</a></li>
+		<li class="page-item"><a class="page-link"
+			href="${contextPath}/discover.htm?page=${page+1}">Next</a></li>
+	</ul>
 
 </body>
 </html>

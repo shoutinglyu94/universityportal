@@ -5,18 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Account</title>
-<style type="text/css">
-#main_context {
-	height: 100%;
-	margin: auto;
-	width: 60%;
-	padding: 1px 16px;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 14px;
-	color: #666;
-}
-</style>
+<title>professor account</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script
@@ -69,9 +58,6 @@
 		</form>
 	</div>
 	</nav>
-
-
-
 	<div id="main_context" class="container">
 		<h2>Account Information</h2>
 		<br />
@@ -131,6 +117,76 @@
 					<h5 class="mb-0">
 						<button class="btn btn-link collapsed" data-toggle="collapse"
 							data-target="#collapseTwo" aria-expanded="false"
+							aria-controls="collapseTwo">Created News</button>
+					</h5>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordion">
+					<div class="card-body">
+						<table class="table">
+							<tr>
+								<th>Title</th>
+								<th>Content</th>
+								<th>Like</th>
+								<th>More Details</th>
+							</tr>
+							<c:forEach var="created_news"
+								items="${requestScope.user.createdNews}">
+								<tr>
+									<td>${created_news.title}</td>
+									<td>${created_news.content}</td>
+									<td>${created_news.like}</td>
+									<td><a
+										href="${contextPath}/news/details.htm?news_id=${created_news.id}&from=account">Details</a></td>
+								</tr>
+							</c:forEach>
+						</table>
+						<a href="${contextPath}/news/new.htm"
+							class="btn btn-default btn-lg" role="button">Create a new
+							piece of news</a>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingTwo">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse"
+							data-target="#collapseTwo" aria-expanded="false"
+							aria-controls="collapseTwo">Created Courses</button>
+					</h5>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordion">
+					<div class="card-body">
+						<table class="table">
+							<tr>
+								<th>Title</th>
+								<th>Description</th>
+								<th>Capacity</th>
+								<th>More Details</th>
+							</tr>
+							<c:forEach var="created_course"
+								items="${requestScope.user.createdCourses}">
+								<tr>
+									<td>${created_course.title}</td>
+									<td>${created_course.address}</td>
+									<td>${created_course.date}</td>
+									<td><a
+										href="${contextPath}/course/details.htm?course_id${created_course.id}&from=account">Details</a></td>
+								</tr>
+							</c:forEach>
+						</table>
+						<a href="${contextPath}/course/new.htm"
+							class="btn btn-default btn-lg" role="button">Create a new
+							Course</a>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingTwo">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse"
+							data-target="#collapseTwo" aria-expanded="false"
 							aria-controls="collapseTwo">Created Events</button>
 					</h5>
 				</div>
@@ -156,7 +212,7 @@
 							</c:forEach>
 						</table>
 						<a href="${contextPath}/event/new.htm"
-							class="btn btn-default btn-lg" role="button">Cteate a new
+							class="btn btn-default btn-lg" role="button">Create a new
 							event</a>
 					</div>
 				</div>

@@ -5,17 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Event Details</title>
+<title>Insert title here</title>
 <style>
-#event_details {
+#main_context {
 	height: 100%;
-	margin: auto;
-	width: 60%;
+	margin-left: 20%;
 	padding: 1px 16px;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 14px;
-	color: #666;
-}
+	color: #666;}
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -64,58 +62,14 @@
 		</form>
 	</div>
 	</nav>
-
-
-
-	<div id="event_details" class="container">
+	<div id="main_context" class="container">
 		<div class="card">
-			<img class="card-img-top" src="..." alt="Card image cap">
+			<div class="card-header">Error</div>
 			<div class="card-body">
-				<h5 class="card-title">Event Details</h5>
-				<p class="card-text">Title: ${event.title}</p>
-			</div>
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item">Date: ${event.date}</li>
-				<li class="list-group-item">Address: ${event.address}</li>
-				<li class="list-group-item">Description: ${event.description}</li>
-			</ul>
-			<div class="card-body">
-				<c:if test="${readonly==false}">
-					<div class="btn-group">
-						<c:set var="contextPath"
-							value="${pageContext.request.contextPath}" />
-						<button type="button" class="btn btn-primary"
-							onclick="location.href = '${contextPath}/user/account.htm'">Previous</button>
-						<button type="button" class="btn btn-primary"
-							onclick="location.href = '${contextPath}/event/edit.htm?event_id=${event.id}'">Edit</button>
-						<button type="button" class="btn btn-danger"
-							onclick="location.href = '${contextPath}/event/delete.htm?event_id=${event.id}'">Delete</button>
-					</div>
-				</c:if>
-				<c:if test="${readonly==true}">
-					<div class="btn-group">
-						<c:set var="contextPath"
-							value="${pageContext.request.contextPath}" />
-						<c:if test="${from=='discover'}">
-							<button type="button" class="btn btn-primary"
-								onclick="location.href = '${contextPath}/discover.htm?page=1'">Back
-								To Discover</button>
-						</c:if>
-						<c:if test="${from=='account'}">
-							<button type="button" class="btn btn-primary"
-								onclick="location.href = '${contextPath}/user/account.htm'">Previous</button>
-						</c:if>
-						<c:if test="${event_join==true}">
-							<button type="button" class="btn btn-primary"
-								onclick="location.href = '${contextPath}/event/join.htm?event_id=${event.id}'">Join</button>
-						</c:if>
-						<button type="button" class="btn btn-danger"
-							onclick="location.href = '${contextPath}/event/quit.htm?event_id=${event.id}'">Quit</button>
-					</div>
-				</c:if>
-
+				<h5 class="card-title">Sorry!</h5>
+				<p class="card-text">You entered some dangerous characters</p>
+				<a href="${contextPath}/home.htm">Go to the login page</a>
 			</div>
 		</div>
 	</div>
 </body>
-</html>

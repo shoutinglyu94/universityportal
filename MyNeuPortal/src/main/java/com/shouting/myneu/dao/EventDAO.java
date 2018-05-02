@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 import com.shouting.myneu.pojo.Event;
+import com.shouting.myneu.pojo.User;
 
 
 
@@ -43,9 +44,9 @@ public class EventDAO extends DAO{
 		try {
 			begin();
 			Criteria crit =  getSession().createCriteria(Event.class);
-			crit.setFirstResult(1 + (pageNumber-1)*10);
-			crit.setMaxResults(10);
-			List<Event> onePageResult= (List<Event>)crit.list();
+			crit.setFirstResult(0 + (pageNumber-1)*6);
+			crit.setMaxResults(6);
+			List<Event> onePageResult= crit.list();
 			return onePageResult;
 		}catch(HibernateException  e){
 			rollback();
@@ -104,6 +105,8 @@ public class EventDAO extends DAO{
 			throw new Exception("Sorry! We cannot delete the event" + e.getMessage());
 		}
 	}
+	
+	
 	
 	
 	

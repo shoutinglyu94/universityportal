@@ -39,16 +39,26 @@ public class User {
 	private String password;
 	@Column(name = "user_status")	
 	private int status;
-
+	@Column(name="user_role")
+	private String role;
+	
 	@OneToMany(mappedBy = "founder", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Event> createdEvents;
-
+	
+	@OneToMany(mappedBy="editor",cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<News> createdNews;
+	
+	@OneToMany(mappedBy="professor",cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Course> createdCourses;
+	
 	@ManyToMany(mappedBy = "participants")
 	private Set<Event> participatedEvents;
 
 	public User() {
 		this.createdEvents = new HashSet<Event>();
 		this.participatedEvents = new HashSet<Event>();
+		this.createdCourses = new HashSet<Course>();
+		this.createdNews =new HashSet<News>();
 	}
 
 	public int getStatus() {
@@ -141,18 +151,6 @@ public class User {
 		if (event == null) return;
 		createdEvents.remove(event);
 	}
-	
-	public void participateEvent(Event event) {
-		if(event ==null) return;
-		this.participatedEvents.add(event);
-		event.getParticipants().add(this);
-	}
-	
-	public void quitEvent(Event event) {
-		if(event ==null) return;
-		this.participatedEvents.remove(event);
-		event.getParticipants().remove(this);
-	}
 
 	public Set<Event> getCreatedEvents() {
 		return createdEvents;
@@ -168,6 +166,30 @@ public class User {
 
 	public void setParticipatedEvents(Set<Event> participatedEvents) {
 		this.participatedEvents = participatedEvents;
+	}
+
+	public Set<News> getCreatedNews() {
+		return createdNews;
+	}
+
+	public void setCreatedNews(Set<News> createdNews) {
+		this.createdNews = createdNews;
+	}
+
+	public Set<Course> getCreatedCourses() {
+		return createdCourses;
+	}
+
+	public void setCreatedCourses(Set<Course> createdCourses) {
+		this.createdCourses = createdCourses;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

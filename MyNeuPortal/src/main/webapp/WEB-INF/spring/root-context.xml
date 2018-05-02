@@ -6,4 +6,6 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean name="userDAO" class="com.shouting.myneu.dao.UserDAO"></bean>
 	<bean name="eventDAO" class="com.shouting.myneu.dao.EventDAO"></bean>
+	<!-- <bean name="newsDAO" class="com.shouting.myneu.dao.NewsDAO"></bean>
+	<bean name="courseDAO" class="com.shouting.myneu.dao.CourseDAO"></bean> -->
 </beans>

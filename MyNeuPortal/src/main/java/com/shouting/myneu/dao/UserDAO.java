@@ -3,12 +3,15 @@ package com.shouting.myneu.dao;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
+import com.shouting.myneu.pojo.Event;
 import com.shouting.myneu.pojo.User;
 
 public class UserDAO extends DAO {
 
 	public User register(User user) throws Exception {
 		try {
+			User u = get(user.getUseremail());
+//			if (u.getUseremail().equals(user.getUseremail())) return null;
 			begin();
 			getSession().save(user);
 			commit();
@@ -58,7 +61,7 @@ public class UserDAO extends DAO {
 	public User get(String userEmail) {
 		try {
 			begin();
-			Query q = getSession().createQuery("from User where userEmail = :useremail");
+			Query q = getSession().createQuery("from User where useremail = :useremail");
 			q.setString("useremail", userEmail);
 			User user = (User) q.uniqueResult();
 			return user;
@@ -116,5 +119,32 @@ public class UserDAO extends DAO {
 			throw new Exception("Sorry! We cannot register new User" + e.getMessage());
 		}
 		
+	}
+	
+	
+	public void addUserIntoEvent(Event event, User user) throws Exception {
+		try {
+			begin();
+			user.getParticipatedEvents().add(event);
+			event.getParticipants().add(user);
+			getSession().save(user);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			throw new Exception("Sorry! We cannot delete the event" + e.getMessage());
+		}
+	}
+
+	public void quitEvent(Event event, User user) throws Exception {
+		try {
+			begin();
+			event.getParticipants().remove(user);
+			user.getParticipatedEvents().remove(event);
+			getSession().save(user);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			throw new Exception("Sorry! We cannot delete the event" + e.getMessage());
+		}
 	}
 }

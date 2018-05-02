@@ -1,22 +1,24 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="UTF-8">
 <title>My Neu Portal</title>
-
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet prefetch'
 	href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic'>
 <link rel='stylesheet prefetch'
 	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
-<link rel="stylesheet" href="css/style_index.css">
+<link rel="stylesheet" href="${contextPath}/css/style_index.css">
 
 </head>
 
 <body>
-
+	
 	<div class="container">
 		<h1>My Neu Portal</h1>
 		<a id="modal_trigger" href="#modal" class="btn">Click here to
@@ -86,13 +88,13 @@
 				<!-- Register Form -->
 				<div class="user_register">
 					<form method="POST" action="user/register.htm">
-						<label>Email Address</label> <input type="email"
-							name="useremail" /> <br /> <label>Password</label> <input
-							type="password" name="userpassword" /> <br />
+						<label>Email Address</label> <input type="email" name="useremail" />
+						<br /> <label>Password</label> <input type="password"
+							name="userpassword" /> <br />
 
 						<div class="checkbox">
-							<input id="send_updates" type="checkbox" /> <label
-								for="send_updates">Send me occasional email updates</label>
+							<input id="send_updates" name="isProfessor" type="checkbox" /> <label
+								for="send_updates">Professor?</label>
 						</div>
 
 						<div class="action_btns">
@@ -109,15 +111,14 @@
 			</section>
 		</div>
 	</div>
-	
-	
+
+
 	<script
 		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<script
 		src='https://andwecode.com/wp-content/uploads/2015/10/jquery.leanModal.min_.js'></script>
 
-	<script src="js/index.js"></script>
-
+	<script src="${contextPath}/js/index.js"></script>
 
 </body>
 

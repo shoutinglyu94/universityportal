@@ -12,5 +12,7 @@
   <property name="hibernate.hbm2ddl.auto">update</property>
   <mapping class="com.shouting.myneu.pojo.User"/>
   <mapping class="com.shouting.myneu.pojo.Event"/>
+  <mapping class="com.shouting.myneu.pojo.News"/>
+  <mapping class="com.shouting.myneu.pojo.Course"/>
  </session-factory>
 </hibernate-configuration>
